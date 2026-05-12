@@ -2,14 +2,15 @@
 // Site configuration
 require_once __DIR__ . '/../config.php';
 
-// Database configuration
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'reverie');
+// Database configuration - Railway environment variables with local fallback
+define('DB_HOST', getenv('MYSQLHOST')     ?: 'hopper.proxy.rlwy.net');
+define('DB_PORT', getenv('MYSQLPORT')     ?: '50037');
+define('DB_USER', getenv('MYSQLUSER')     ?: 'root');
+define('DB_PASS', getenv('MYSQLPASSWORD') ?: 'hDoVbSWRbXtOEHlERQmJaUPYcbFdczZK');
+define('DB_NAME', getenv('MYSQLDATABASE') ?: 'railway');
 
 // Create database connection
-$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME, (int)DB_PORT);
 
 // Check connection
 if (!$conn) {
