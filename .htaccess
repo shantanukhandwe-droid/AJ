@@ -1,0 +1,8 @@
+# Reverie Rewrite Rules
+RewriteEngine On
+RewriteBase /reverie/
+
+# If file or directory exists, serve it directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
